@@ -1,4 +1,5 @@
 # SPA project created using Vue JS, Vue CLI, Vue routing, Vuex, SASS
+## How to run it:
 1. git clone https://github.com/dreadlocker/phonesCatalog.git
 2. cd phonesCatalog/
 3. npm i
