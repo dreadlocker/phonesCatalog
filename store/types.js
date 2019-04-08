@@ -1,0 +1,6 @@
+//TYPES_NODE
+export const PREVIOUS_PAGE = "store/PREVIOUS_PAGE";
+export const CURRENT_PAGE = "store/CURRENT_PAGE";
+//ACTIONS_NODE
+export const ACTION_PREVIOUS_PAGE = "store/ACTION_PREVIOUS_PAGE";
+export const ACTION_CURRENT_PAGE = "store/ACTION_CURRENT_PAGE";
