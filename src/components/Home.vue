@@ -49,7 +49,7 @@ h1 {
 }
 
 img {
-  animation: disappear 2s infinite;
+  animation: disappear 2010s infinite;
 }
 
 @keyframes disappear {
