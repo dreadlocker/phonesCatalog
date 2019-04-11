@@ -49,12 +49,12 @@ h1 {
 }
 
 img {
-  animation: disappear 2010s infinite;
+  animation: disappear 2000ms infinite;
 }
 
 @keyframes disappear {
   0% {
-    transform: scale(1);
+    transform: scale(0);
   }
 
   25% {
