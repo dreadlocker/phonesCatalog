@@ -11,26 +11,17 @@
 </template>
 
 <script>
-import {
-  phoneDataMixin
-} from "@/mixins/phoneData.js";
-import {
-  mapActions,
-  mapState
-} from "vuex";
-import {
-  ACTION_PREVIOUS_PAGE,
-  ACTION_CURRENT_PAGE
-} from "../../store/types.js";
+import { phoneDataMixin } from "@/mixins/phoneData.js";
+import { mapActions, mapState } from "vuex";
+import { ACTION_PREVIOUS_PAGE, ACTION_CURRENT_PAGE } from "../../store/types.js";
 
 export default {
   name: "paginator",
   mixins: [phoneDataMixin],
+  props: ['changedCurrentPage'],
   data() {
     return {
       phonesArrFromMixin: phoneDataMixin.phonesArr,
-      previous_page: 0,
-      current_page: 1,
       lastPageNum: 0,
     };
   },
@@ -38,16 +29,12 @@ export default {
     ...mapState({
       items_count: state => state.items_count,
       // get data from Vuex to render the last page you were on
-      previous_page_vuex: state => state.previous_page,
-      current_page_vuex: state => state.current_page,
+      previous_page: state => state.previous_page,
+      current_page: state => state.current_page,
     }),
   },
   mounted() {
-    this.previous_page = this.previous_page_vuex;
-    this.current_page = this.current_page_vuex;
-    this.lastPageNum = Math.ceil(
-      this.phonesArrFromMixin.length / this.items_count
-    );
+    this.lastPageNum = Math.ceil(this.phonesArrFromMixin.length / this.items_count);
   },
   methods: {
     ...mapActions({
@@ -55,25 +42,20 @@ export default {
       current_page_action: ACTION_CURRENT_PAGE
     }),
     prevPage() {
-      this.previous_page--;
-      this.current_page--;
+      const previous_page = this.previous_page - 1;
+      const current_page = this.current_page - 1;
 
-      const slicedArr = this.phonesArrFromMixin.slice(this.previous_page * this.items_count, this.current_page * this.items_count);
-      this.$emit('phonesArr', slicedArr);
+      this.previous_page_action(previous_page);
+      this.current_page_action(current_page);
     },
     nextPage() {
-      this.previous_page++;
-      this.current_page++;
+      const previous_page = this.previous_page + 1;
+      const current_page = this.current_page + 1;
 
-      const slicedArr = this.phonesArrFromMixin.slice(this.previous_page * this.items_count, this.current_page * this.items_count);
-      this.$emit('phonesArr', slicedArr);
+      this.previous_page_action(previous_page);
+      this.current_page_action(current_page);
     }
   },
-  beforeDestroy() {
-    // save data to Vuex to render the last page you were on
-    this.previous_page_action(this.previous_page);
-    this.current_page_action(this.current_page);
-  }
 };
 </script>
 
